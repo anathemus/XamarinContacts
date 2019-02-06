@@ -4,11 +4,39 @@
              xmlns:local="clr-namespace:DataBindingDemo1"
              x:Class="DataBindingDemo1.MainPage">
 
-    <StackLayout>
+    <StackLayout Padding="30">
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Label Text="Contact Information: " FontSize="20" />
+        <ListView x:Name="ContactList" ItemsSource="{Binding .}" ItemTapped="OnItemTapped" IsGroupingEnabled="True"
+                  GroupShortNameBinding="{Binding Key}" HasUnevenRows="True">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell Height="30">
+                        <StackLayout VerticalOptions="FillAndExpand"
+                                     Padding="10"
+                                     BackgroundColor="Blue">
+                            <Label Text="{Binding Key}" TextColor="White" VerticalOptions="Center"/>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding FirstName}" FontSize="14" FontAttributes="Bold" TextColor="Blue" />
+                                    <Label Text="{Binding LastName}" FontSize="14" FontAttributes="Bold" TextColor="Blue" />
+                                </StackLayout>
+                                <Label Text="{Binding Email}" FontSize="10" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 
 </ContentPage>
